@@ -1,8 +1,10 @@
 package cleancode.studycafe.asis.model;
 
-public class StudyCafePass {
+import java.util.Set;
 
+public class StudyCafePass {
     private final StudyCafePassType passType;
+
     private final int duration;
     private final int price;
     private final double discountRate;
@@ -14,8 +16,18 @@ public class StudyCafePass {
         this.discountRate = discountRate;
     }
 
+    public boolean isSamePassType(StudyCafePassType passType) {
+        return this.passType == passType;
+
+    }
+
     public static StudyCafePass of(StudyCafePassType passType, int duration, int price, double discountRate) {
         return new StudyCafePass(passType, duration, price, discountRate);
+    }
+
+    public boolean isSameDurationType(StudyCafeLockerPass lockerPass) {
+        return lockerPass.isSamePassType(this.passType)
+                && lockerPass.isSameDuration(this.duration);
     }
 
     public StudyCafePassType getPassType() {
@@ -46,5 +58,10 @@ public class StudyCafePass {
         }
         return "";
     }
+//    private static final Set<StudyCafePassType> LOCKER_TYPE = Set.of(StudyCafePassType.FIXED);
 
+    public boolean cannotUseLocker() {
+//        return !LOCKER_TYPE.contains(this.passType);
+        return this.passType.isNotLockerType();
+    }
 }
