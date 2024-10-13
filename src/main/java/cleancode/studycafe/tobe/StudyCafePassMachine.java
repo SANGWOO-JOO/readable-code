@@ -15,6 +15,8 @@ public class StudyCafePassMachine {
     private final InputHandler inputHandler = new InputHandler();
     private final OutputHandler outputHandler = new OutputHandler();
 
+
+
     public void run() {
         try {
             outputHandler.showWelcomeMessage();
